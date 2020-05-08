@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+<link href="/admin/img/fav.png" rel="shortcut icon" type="image/x-icon">
+<title>文件管理</title>
+<!-- admin lte 必须 -->
+<link rel="stylesheet" href="/admin/plugins/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="/admin/plugins/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="/admin/plugins/Ionicons/css/ionicons.min.css">
+<link rel="stylesheet" href="/admin/plugins/adminlte/css/AdminLTE.min.css">
+<link rel="stylesheet" href="/admin/plugins/adminlte/css/skins/_all-skins.min.css">
+<!-- bootstrap table -->
+<link rel="stylesheet" href="/admin/plugins/bootstrap-table/bootstrap-table.min.css">
+<!-- 加载效果 -->
+<link rel="stylesheet" href="/admin/plugins/pace-1.0.2/themes/blue/pace-theme-flash.css">
+<!-- 时间选择器 -->
+<link rel="stylesheet" href="/admin/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css">
+</head>
+<!-- bootstrap select  -->
+<link rel="stylesheet" href="/admin/plugins/bootstrap-select/css/bootstrap-select.css">
+<!-- bootstrap validator -->
+<link rel="stylesheet" href="/admin/plugins/bootstrapvalidator/css/bootstrapValidator.min.css">
+<link rel="stylesheet" href="/admin/css/base.css">
+<!-- 单选复选 -->
+<link rel="stylesheet" href="/admin/plugins/iCheck/all.css">
+<link rel="stylesheet" href="/admin/plugins/layui/css/layui.css">
+
+<script src="/admin/plugins/jquery/jquery.min.js"></script>
+<!--[if lt IE 9]>
+<script src="/admin/plugins/html5/html5shiv.min.js"></script>
+<script src="/admin/plugins/html5/respond.min.js"></script>
+<![endif]-->
+<!-- <link rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">  -->
+<script id="sf-radio-template" type="text/x-jquery-tmpl">
+<label class="radio-inline"> 
+	<input type="radio" way-data="${inputName}" name="${inputName}" value="${code}" ${required} ${disabled}>${name}
+</label>
+</script>
+<script id="sf-checkbox-template" type="text/x-jquery-tmpl">
+<label class="checkbox-inline">
+	<input type="checkbox" way-data="${inputName}" ${required} ${disabled}  name="${inputName}" value="${code}">${name}
+</label>  
+</script>
+<script id="sf-select-template" type="text/x-jquery-tmpl">
+<option value="${code}" ${disabled}>${name}</option>
+</script>
+
+
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+	<div class="wrapper">
+		<div class="content-wrapper ml0">
+			<section class="content-header">
+				<h1>文件管理</h1>
+				<ol class="breadcrumb">
+					<li><a href="#"><i class="fa fa-dashboard"></i>系统管理</a></li>
+					<li class="active">文件管理</li>
+				</ol>
+			</section>
+			<section class="content container-fluid">
+				<div class="box box-primary">
+					<div class="box-body">
+						<form class="form-inline" way-scope="model.search">
+							<div class="form-group">
+								<label for="search-name">名称</label> <input type="text"
+									class="form-control" placeholder="请输入名称" name="name" way-data="name"
+									maxlength="200">
+							</div>
+							<div class="form-group">
+								<label for="search-name">开始时间</label> <input type="text" 
+									class="form-control date search" data-date-clear="false" data-default-day="0" placeholder=">=" name="startDate"  way-data="startDate"
+									maxlength="100">
+							</div>
+							<div class="form-group">
+								<label for="search-name">截止时间</label> <input type="text" 
+									class="form-control date search" data-date-clear="false" data-default-day="1"  placeholder="<=" name="endDate"  way-data="endDate"
+									maxlength="100">
+							</div>
+							<button type="button" class="btn btn-default sf-permission-ctl" id="search" data-sf-permission="sys:file:qry">
+								<i class="fa fa-search"></i>
+							</button>
+							<div class="btn-group pull-right">
+								<label for="fileUpload" class="btn btn-default sf-permission-ctl" data-sf-permission="sys:file:upload"><i class="fa fa-cloud-upload"></i> 上传</label>
+								<input type="file" name="file" id="fileUpload" style="display: none;" >
+								<button type="button" class="btn btn-danger sf-permission-ctl" id="delete" data-sf-permission="sys:file:delete">
+									<i class="fa fa-trash-o"></i>
+								</button>
+							</div>
+						</form>
+					</div>
+				</div>
+				<div class="box">
+					<div class="box-body">
+						<!-- table -->
+						<table id="table"></table>
+					</div>
+				</div>
+			</section>
+		</div>
+	</div>
+	<!-- Bootstrap 3.3.7 -->
+<script src="/admin/plugins/bootstrap/js/bootstrap.min.js"></script>
+<!-- AdminLTE App -->
+<script src="/admin/plugins/adminlte/js/adminlte.min.js"></script>
+<!-- bootstrap table -->
+<script src="/admin/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+<script src="/admin/plugins/bootstrap-table/bootstrap-table-zh-CN.min.js"></script>
+<!-- 加载效果 -->
+<script src="/admin/plugins/pace-1.0.2/pace.min.js" ></script>
+<!-- 弹出层 -->
+<script src="/admin/plugins/layer-v3.0.3/layer.js"></script>
+<script src="/admin/plugins//layui/layui.js"></script>
+
+<!-- wayjs -->
+<script src="/admin/plugins/wayjs/way.js"></script>
+<!-- 单选复选框 -->
+<script src="/admin/plugins/iCheck/icheck.min.js"></script>
+<!-- 下拉 -->
+<script src="/admin/plugins/bootstrap-select/js/bootstrap-select.js"></script>
+<script src="/admin/plugins/bootstrap-select/js/i18n/defaults-zh_CN.min.js"></script>
+<!-- 校验 -->
+<script src="/admin/plugins/bootstrapvalidator/js/bootstrapValidator.min.js"></script>
+<script src="/admin/plugins/bootstrapvalidator/js/language/zh_CN.js"></script>
+<!-- 模板工具 -->
+<script src="/admin/plugins/jquery-tmpl/jquery.tmpl.min.js"></script>
+<!-- 时间选择器 -->
+<script src="/admin/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+<script src="/admin/plugins/bootstrap-datepicker/locales/bootstrap-datepicker.zh-CN.min.js"></script>
+<!-- JSON 插件 -->
+<script src="/admin/plugins/jquery-serialize-JSON/jquery.serializejson.min.js"></script>
+<script src="/admin/js/lib/sf-bootstraptable.js"></script>
+<!-- js 全局js -->
+<script src="/admin/js/lib/sf-base.js"></script>
+<!-- 工具 -->
+<script src="/admin/js/lib/sf-utils.js"></script>
+
+
+
+	<script src="/admin/plugins/jquery-file-upload/js/vendor/jquery.ui.widget.js"></script>
+<script src="/admin/plugins/jquery-file-upload/js/jquery.fileupload.js"></script>
+<script src="/admin/plugins/jquery-file-upload/js/jquery.iframe-transport.js"></script>
+<!-- 图片模板 -->
+<script id="sf-image-template" type="text/x-jquery-tmpl">
+	<div class="sf-file-wrapper" style="display: inline-block;">
+		<input type="hidden" name="${inputName}" value="${path}">
+		<img src="${url}" style="width: 128px;height: 128px;" title="${fileName}">
+	 	<p><a href="javascript:void(0);" class="text-danger sf-file-delete">删除</a></p>
+	</div>
+</script>
+<!-- 文件模板 -->
+<script id="sf-file-template" type="text/x-jquery-tmpl">
+	<div class="sf-file-wrapper">
+		<input type="hidden" name="${inputName}" value="${path}">
+	 	<p><a href="${url}" target="_blank">${fileName}</a> <a href="javascript:void(0);" class="text-danger sf-file-delete">删除</a></p>
+	</div>
+</script>
+<!-- 查看单条图片模板 -->
+<script id="sf-view-image-template" type="text/x-jquery-tmpl">
+	<div class="sf-file-wrapper" style="display: inline-block;">
+		<a href="${url}" target="_blank"><img src="${url}" style="width: 128px;height: 128px;" title="${fileName}"></a> 
+	</div>
+</script>
+<!-- 查看单条文件模板 -->
+<script id="sf-view-file-template" type="text/x-jquery-tmpl">
+	<div class="sf-file-wrapper">
+	 	<p><a href="${url}" target="_blank">${fileName}</a></p>
+	</div>
+</script>
+<script type="text/javascript">
+$(function(){
+	 $("body").on("click",".sf-file-delete",function(){
+		 $(this).parents(".sf-file-wrapper").remove();
+	 });
+})
+</script>
+
+
+
+	<script src="/admin/js/sys/file.js"></script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+{
+  "hints": [],
+  "groups": [
+    {
+      "sourceType": "com.seezoon.admin.common.file.config.AliOssConfig",
+      "name": "file.aliyun",
+      "type": "com.seezoon.admin.common.file.config.AliOssConfig"
+    },
+    {
+      "sourceType": "com.seezoon.admin.common.file.config.LocalConfig",
+      "name": "file.local",
+      "type": "com.seezoon.admin.common.file.config.LocalConfig"
+    }
+  ],
+  "properties": [
+    {
+      "sourceType": "com.seezoon.admin.common.file.config.AliOssConfig",
+      "name": "file.aliyun.access-key-id",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.seezoon.admin.common.file.config.AliOssConfig",
+      "name": "file.aliyun.access-key-secret",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.seezoon.admin.common.file.config.AliOssConfig",
+      "name": "file.aliyun.bucket-name",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.seezoon.admin.common.file.config.AliOssConfig",
+      "name": "file.aliyun.endpoint",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.seezoon.admin.common.file.config.AliOssConfig",
+      "name": "file.aliyun.url-prefix",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.seezoon.admin.common.file.config.LocalConfig",
+      "name": "file.local.store-path",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.seezoon.admin.common.file.config.LocalConfig",
+      "name": "file.local.url-prefix",
+      "type": "java.lang.String"
+    }
+  ]
+}

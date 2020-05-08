@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.seezoon.service.modules.base.dao.DeviceStaticInfoDao">
+    <resultMap id="BaseResultMap" type="com.seezoon.service.modules.base.entity.DeviceStaticInfo" >
+        <id column="id" property="id" jdbcType="VARCHAR" />
+        <result column="dev_code" property="devCode" jdbcType="VARCHAR" />
+        <result column="dev_name" property="devName" jdbcType="VARCHAR" />
+        <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+        <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+        <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+        <result column="remarks" property="remarks" jdbcType="VARCHAR" />
+    </resultMap>
+
+
+    <sql id="Base_Column_List">
+        id, dev_code,dev_name, create_by, create_date, update_by,  update_date, remarks
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="String" >
+        select
+        <include refid="Base_Column_List" />
+        from BASE_DEVICE_STATIC_INFO
+        where id = #{id}
+    </select>
+
+
+    <select id="findList" resultMap="BaseResultMap" parameterType="com.seezoon.service.modules.base.entity.DeviceStaticInfo" >
+        select
+        <include refid="Base_Column_List" />
+        from BASE_DEVICE_STATIC_INFO
+        <where>
+            <if test="id !=null and id!=''">
+                and id = #{id}
+            </if>
+
+            <if test="devName !=null and name!=''">
+                and dev_name like concat("%",#{devName},"%")
+            </if>
+
+            ${dsf}
+        </where>
+        <choose>
+            <when test="sortField != null and sortField != '' and direction != null and direction !=''">
+                order by ${sortField} ${direction}
+            </when>
+            <otherwise>
+                <!-- 默认排序设置 -->
+            </otherwise>
+        </choose>
+    </select>
+
+
+    <delete id="deleteByPrimaryKey" >
+        delete from BASE_DEVICE_STATIC_INFO
+        where id = #{id} ${dsf}
+    </delete>
+
+
+    <insert id="insert" parameterType="com.seezoon.service.modules.base.entity.DeviceStaticInfo" >
+        insert into BASE_DEVICE_STATIC_INFO (id,dev_code,dev_name,create_by,create_date,update_by,update_date,remarks)
+        values (#{id},#{devCode},#{devName},#{createBy},#{createDate},#{updateBy},#{updateDate},#{remarks})
+    </insert>
+
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.seezoon.service.modules.base.entity.DeviceStaticInfo" >
+        update BASE_DEVICE_STATIC_INFO
+        <set>
+            <if test="devName != null" >
+                dev_name = #{devName},
+            </if>
+            <if test="devName != null" >
+                dev_code = #{devName},
+            </if>
+            <if test="updateBy != null" >
+                update_by = #{updateBy},
+            </if>
+            <if test="updateDate != null" >
+                update_date = #{updateDate},
+            </if>
+            <if test="remarks != null" >
+                remarks = #{remarks},
+            </if>
+        </set>
+        where id = #{id} ${dsf}
+    </update>
+
+
+    <update id="updateByPrimaryKey" parameterType="com.seezoon.service.modules.base.entity.DeviceStaticInfo" >
+        update BASE_DEVICE_STATIC_INFO
+        set
+            dev_name = #{devName}
+            ,dev_code = #{devCode}
+            ,update_by = #{updateBy}
+            ,update_date = #{updateDate}
+            ,remarks = #{remarks}
+        where id = #{id} ${dsf}
+  </update>
+
+</mapper>

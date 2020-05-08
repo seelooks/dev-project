@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.seezoon.service.modules.base.dao.DeviceInfoDao" >
+  <resultMap id="BaseResultMap" type="com.seezoon.service.modules.base.entity.DeviceInfo" >
+    <id column="d_id" property="id" jdbcType="INTEGER" />
+    <result column="d_code" property="code" jdbcType="VARCHAR" />
+    <result column="d_name" property="name" jdbcType="VARCHAR" />
+    <result column="descInfo" property="descInfo" jdbcType="VARCHAR" />
+    <result column="inserttime" property="inserttime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+  d_id,d_code,d_name,descInfo,inserttime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from BASE_DEVICEINFO
+    where id = #{id}
+  </select>
+  <select id="findList" resultMap="BaseResultMap" parameterType="com.seezoon.service.modules.base.entity.DeviceInfo" >
+    select 
+    <include refid="Base_Column_List" />
+    from BASE_DEVICEINFO
+    <where>
+    <if test="name !=null and name!=''">
+    and d_name like concat("%",#{name},"%")
+    </if>
+	${dsf}
+    </where>
+	<choose>
+    <when test="sortField != null and sortField != '' and direction != null and direction !=''">
+    order by ${sortField} ${direction}
+    </when>
+    <otherwise>
+   <!-- 默认排序设置 -->
+    </otherwise>
+    </choose>
+  </select>
+  <delete id="deleteByPrimaryKey" >
+    delete from BASE_DEVICEINFO
+    where id = #{id} ${dsf}
+  </delete>
+  <insert id="insert" parameterType="com.seezoon.service.modules.base.entity.DeviceInfo" >
+    insert into BASE_DEVICEINFO (d_id,d_code,d_name,descInfo,inserttime)
+    values (#{id},#{code},#{name},#{descInfo},#{inserttime})
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.seezoon.service.modules.base.entity.DeviceInfo" >
+    update BASE_DEVICEINFO
+    <set>
+      <if test="code != null" >
+        d_code = #{code},
+      </if>
+      <if test="name != null" >
+        d_name = #{name},
+      </if>
+      <if test="descInfo != null" >
+        descInfo = #{descInfo},
+      </if>
+      <if test="inserttime != null" >
+        inserttime = #{inserttime},
+      </if>
+    </set>
+    where id = #{id} ${dsf}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.seezoon.service.modules.base.entity.DeviceInfo" >
+    update BASE_DEVICEINFO
+    set 
+        d_code = #{code}
+        ,d_name = #{name}
+        ,descInfo = #{descInfo}
+        ,inserttime = #{inserttime}
+    where id = #{id} ${dsf}
+  </update>
+</mapper>
