@@ -1,4 +1,4 @@
-## DevPro##
+## DevPro
 这是一个前后端分离的开发脚手架，前端使用SpringBoot，后端使用way.js 前后端分离
 ## DevPro (为seezoon-framework-all spring boot 版本)##
 基于spring,mybatis,shiro面向接口开发的的一套后台管理系统，方便快速开发；采用常用的技术栈，降低学习成本，项目完全前后端分离，后端定义统一的接口格式，统一参数校验，统一权限控制，异常拦截，全局错误码等，让后续开发只需关注业务代码。
